@@ -12,7 +12,7 @@ The color sensor is applied to the detection of object color. It has a wide rang
 
 This sensor primarily uses the APDS9960 component. It can detect the color of an object, the ambient light intensity, object proximity, and support non-contact gesture detection. It features integrated RGB color detection which enables identification of various colors, ambient light detection to measure light intensity under different lighting conditions, and a built-in infrared LED to support proximity sensing.
 
-<img class="common_img" src="../_static/media/chapter_1/section_1/media/image3.png" style="width:200px" />
+<img class="common_img" src="../_static/media/chapter_1/section_1/media/image3.png" style="width:150px" />
 
 ## 1.2 Notice
 
