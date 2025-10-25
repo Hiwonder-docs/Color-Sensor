@@ -109,6 +109,11 @@ myst_enable_extensions = [
     "dollarmath",
 ]
 
+html_context = {
+    'display_github': False,
+    'master_doc': False,
+    'home_url': 'https://wiki.hiwonder.com/en/latest/',  # ← 主项目的URL
+}
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']

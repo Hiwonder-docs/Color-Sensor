@@ -47,7 +47,6 @@ section .rst-content .note .admonition-title{
     font-size: 20px;
     padding: 5px 0;
 }
-
 .wy-side-scroll .wy-menu-vertical .toctree-l1.current .h-current.toctree-l2>ul{
     display:block !important;
 }
@@ -63,11 +62,9 @@ section .rst-content .note .admonition-title{
 .wy-menu-vertical li.toctree-l2.h-current li.toctree-l3>a {
     padding: .4045em 1.618em .4045em 4.045em;
 }
-
 table td{
     white-space: unset !important;
 }
-
 .rst-content section ol li{
     margin-bottom: 15px;
 }
