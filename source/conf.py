@@ -112,7 +112,7 @@ myst_enable_extensions = [
 html_context = {
     'display_github': False,
     'master_doc': False,
-    'home_url': 'https://wiki.hiwonder.com/en/latest/',  # ← 主项目的URL
+    'home_url': 'https://wiki.hiwonder.com/en/latest/'
 }
 
 html_theme = 'sphinx_rtd_theme'
