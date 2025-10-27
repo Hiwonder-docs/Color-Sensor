@@ -85,8 +85,7 @@ def setup(app):
     app.connect("source-read", replace_gfm_callouts)
 
     # 添加返回主项目的链接
-    app.add_config_value('main_project_url',
-                        'https://your-main-project.readthedocs.io/', 'html')
+    app.add_config_value('main_project_url','https://wiki.hiwonder.com/en/latest/', 'html')
 
 project = 'Color Sensor'
 copyright = '2025, Hiwonder'
