@@ -84,6 +84,10 @@ def replace_gfm_callouts(app, docname, source):
 def setup(app):
     app.connect("source-read", replace_gfm_callouts)
 
+    # 添加返回主项目的链接
+    app.add_config_value('main_project_url',
+                        'https://your-main-project.readthedocs.io/', 'html')
+
 project = 'Color Sensor'
 copyright = '2025, Hiwonder'
 author = 'Hiwonder'
@@ -108,12 +112,6 @@ myst_enable_extensions = [
     "amsmath",
     "dollarmath",
 ]
-
-html_context = {
-    'display_github': False,
-    'master_doc': False,
-    'home_url': 'https://wiki.hiwonder.com/en/latest/'
-}
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
