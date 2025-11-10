@@ -26,9 +26,11 @@ Drag the program and SDK library files into the Raspberry Pi system image. For d
 >
 > **Make sure the library files are placed in the same directory as the program.**
 
-Open the terminal and enter the command to change to the program directory: **sudo chmod a+x Sensor_Demo/**
+Open the terminal and enter the command to change to the program directory: 
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image5.png" style="width:500px" />
+```py
+sudo chmod a+x Sensor_Demo/
+```
 
 ## 3.2 Test Case
 
@@ -36,13 +38,17 @@ In this case, the RGB sensor is used to detect the corresponding color, and the 
 
 ### 3.2.1 Program Download
 
-1)  Open the terminal and enter the command to navigate to the program directory, enter: **cd Desktop/Sensor_Demo/**, then press Enter.
+1. Open the terminal and enter the command to navigate to the program directory, enter: **cd Desktop/Sensor_Demo/**, then press Enter.
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image6.png" style="width:500px" />
+   ```py
+   cd Desktop/Sensor_Demo/
+   ```
 
-2)  To run this example program, enter: **python3 ColorSensorDemo.py**
+2. To run this example program, enter: 
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image7.png" style="width:500px" />
+   ```py
+   python3 ColorSensorDemo.py
+   ```
 
 ### 3.2.2 Project Outcome
 
@@ -52,11 +58,26 @@ Aim the color sensor at objects in red, green, and blue respectively. The sensor
 
 - **Import Libraries**
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image8.png" style="width:500px" />
+```py
+#!/usr/bin/env python3
+import os
+import sys
+import time
+import signal
+import smbus
+import RPi.GPIO as GPIO
+#import Board
+from apds9960.const import *
+from apds9960 import APDS9960
+```
 
 - **Check the running Python version**
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image9.png" style="width:500px" />
+```py
+if sys.version_info.major == 2:
+    print('Please run this program with python3!')
+    sys.exit(0)
+```
 
 Check if the running Python version is 3.0 or higher.
 
@@ -66,23 +87,67 @@ If yes, the program runs normally; if not, it prints a message via the `print()`
 
 Describe the saturation of the red, green, and blue colors.
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image10.png" style="width:500px" />
+```py
+# Calibration values (校准值)
+R_W = 2600
+G_W = 4400
+B_W = 6400
+R_B = 120
+G_B = 180
+B_B = 260
+```
 
 Initialize the color sensor.
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image11.png" style="width:500px" />
+```py
+bus = smbus.SMBus(1)
+apds = APDS9960(bus)
+apds.enableLightSensor()
+detect_color = None
+```
 
 Initialize communication with the APDS9960 color sensor and enable the color sensor function.
 
 Detect interrupt signal
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image12.png" style="width:500px" />
+```py
+def Stop(signum, frame):
+    global start
+
+    start = False
+    print('Closing...')
+```
 
 When "**Ctrl+C**" is pressed to interrupt the program, it prints "**Shutting down...**" and sets the global variable start to False.
 
 Color Detection
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image13.png" style="width:500px" />
+```py
+while True:
+
+    # Read the three color channel values (读取三个颜色通道值)
+    red = apds.readRedLight()
+    green = apds.readGreenLight()
+    blue = apds.readBlueLight()
+    
+    # Add calibration (加入校准)
+    r = abs(int((red - R_B)*255/(R_W - R_B)))
+    g = abs(int((green - G_B)*255/(G_W - G_B)))
+    b = abs(int((blue - B_B)*255/(B_W - B_B)))
+    
+    # Determine color (判别颜色)
+    if r - max(g, b) > 40:
+        detect_color = 'red'
+    elif g - max(r, b) > 40:
+        detect_color = 'green'
+    elif b - max(r, g) > 40:
+        detect_color = 'blue'
+    else:
+        detect_color = None
+    print(detect_color)
+    
+    time.sleep(0.2)
+```
 
 1)  Use the method of **APDS9960** library to read the red, green, and blue channel values.
 

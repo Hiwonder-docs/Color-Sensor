@@ -132,11 +132,15 @@ Program to display the color sensor detection results in the Jetson terminal win
 
 "**cd Desktop/**", and press Enter
 
-<img class="common_img" src="../_static/media/chapter_1/section_4/media/image5.png" style="width:500px" />
+```py
+cd Desktop/
+```
 
-2)  Run the program by entering:
+2. Run the program by entering:
 
-"**python3 ColorSensorDemo.py** "
+   ```py
+   python3 ColorSensorDemo.py
+   ```
 
 <img class="common_img" src="../_static/media/chapter_1/section_4/media/image6.png" style="width:500px" />
 
@@ -150,7 +154,21 @@ Place the object in the color sensor's recognition area, the sensor then determi
 
 - **Import Libraries**
 
-<img class="common_img" src="../_static/media/chapter_1/section_4/media/image8.png" style="width:500px" />
+```py
+import os
+import sys
+import time
+import signal
+import smbus
+import Jetson.GPIO as GPIO
+from apds9960.const import *
+from apds9960 import APDS9960
+
+
+if sys.version_info.major == 2:
+    print('Please run this program with python3!')
+    sys.exit(0)
+```
 
 Import the library files required by the program, including the system file os, time processing function time, GPIO function, and **APDS9960** library files used by the color sensor. Meanwhile, the program will detect the currently used Python version and will issue a prompt if it is not Python 3.
 
@@ -160,7 +178,31 @@ Then set the RGB calibration value of the color sensor and initialize the color 
 
 Set the variable start to True for the color sensor to start detecting, and set the shutdown function. When the terminal receives the shutdown signal, it will set the variable start to False to shut down the detection.
 
-<img class="common_img" src="../_static/media/chapter_1/section_4/media/image9.png" style="width:500px" />
+```py
+# Calibration values (校准值)
+R_W = 2600
+G_W = 4400
+B_W = 6400
+R_B = 120
+G_B = 180
+B_B = 260
+
+# Color sensor initialization (颜色传感器初始化)
+bus = smbus.SMBus(1)
+apds = APDS9960(bus)
+apds.enableLightSensor()
+detect_color = None
+
+start = True
+# Pre-processing before closing (关闭前处理)
+def Stop(signum, frame):
+    global start
+
+    start = False
+    print('关闭程序')
+
+signal.signal(signal.SIGINT, Stop)
+```
 
 - **Main Function**
 
@@ -168,4 +210,29 @@ In the while loop, use the functions `apds.readRedLight`, `apds.readGreenLight`,
 
 Next, add the calibration data and use conditional statements to determine which RGB component has the highest proportion, thereby identifying the target color. For example, if the R component is greater than the maximum of the G and B components by more than 40 units, the target is identified as red.
 
-<img class="common_img" src="../_static/media/chapter_1/section_4/media/image10.png" style="width:500px" />
+```py
+while start:
+
+    # Read the three color channel values (读取三个颜色通道值)
+    red = apds.readRedLight()
+    green = apds.readGreenLight()
+    blue = apds.readBlueLight()
+    
+    # Add calibration (加入校准)
+    r = abs(int((red - R_B)*255/(R_W - R_B)))
+    g = abs(int((green - G_B)*255/(G_W - G_B)))
+    b = abs(int((blue - B_B)*255/(B_W - B_B)))
+    
+    # Determine color (判别颜色)
+    if r - max(g, b) > 40:
+        detect_color = 'red'
+    elif g - max(r, b) > 40:
+        detect_color = 'green'
+    elif b - max(r, g) > 40:
+        detect_color = 'blue'
+    else:
+        detect_color = None
+    print(detect_color)
+    
+    time.sleep(0.2)
+```
