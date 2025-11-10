@@ -112,8 +112,8 @@ myst_enable_extensions = [
     "dollarmath",
 ]
 
-html_url='';
-html_logo = '_static/logo.png';
+html_url='https://wiki.hiwonder.com/'
+html_logo = '_static/logo.png'
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_css_files = ['style.css']
