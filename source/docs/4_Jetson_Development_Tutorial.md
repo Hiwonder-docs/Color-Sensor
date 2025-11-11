@@ -128,9 +128,7 @@ Program to display the color sensor detection results in the Jetson terminal win
 
 ### 4.2.1 Program Download
 
-1)  Open the terminal and enter the following command to navigate to the program directory:
-
-"**cd Desktop/**", and press Enter
+1)  Open the terminal and enter the following command to navigate to the program directory, and press Enter
 
 ```py
 cd Desktop/
@@ -138,11 +136,9 @@ cd Desktop/
 
 2. Run the program by entering:
 
-   ```py
-   python3 ColorSensorDemo.py
-   ```
-
-<img class="common_img" src="../_static/media/chapter_1/section_4/media/image6.png" style="width:500px" />
+```py
+sudo python3 ColorSensorDemo.py
+```
 
 ### 4.2.2 Project Outcome
 

@@ -12,9 +12,9 @@ This section provides an example of connecting the color sensor module with Dupo
 
 > [!NOTE]
 >
-> * When using Hiwonder's lithium battery, connect the battery cable with the red wire to the positive (+) terminal and the black wire to the negative (–) terminal of the DC port.
+> * **When using Hiwonder's lithium battery, connect the battery cable with the red wire to the positive (+) terminal and the black wire to the negative (–) terminal of the DC port.**
 >
-> * If the battery is not connected to the cables, do not connect the cable ends directly together. Doing so may cause a short circuit and damage the system.
+> * **If the battery is not connected to the cables, do not connect the cable ends directly together. Doing so may cause a short circuit and damage the system.**
 
 ### 3.1.2 Environment Configuration
 
@@ -40,15 +40,15 @@ In this case, the RGB sensor is used to detect the corresponding color, and the 
 
 1. Open the terminal and enter the command to navigate to the program directory, enter: **cd Desktop/Sensor_Demo/**, then press Enter.
 
-   ```py
-   cd Desktop/Sensor_Demo/
-   ```
+```py
+cd Desktop/Sensor_Demo/
+```
 
 2. To run this example program, enter: 
 
-   ```py
-   python3 ColorSensorDemo.py
-   ```
+```py
+python3 ColorSensorDemo.py
+```
 
 ### 3.2.2 Project Outcome
 
