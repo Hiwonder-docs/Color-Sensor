@@ -118,9 +118,9 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_css_files = ['style.css']
 html_js_files = ['custom.js']
-#html_theme_options = {
+html_theme_options = {
 #    'extra_navbar': '<a href="https://your-main-project.readthedocs.io/">🏠 返回主项目</a>',
-#    'style_nav_header_background': '#f98800',
+    'style_nav_header_background': '#f98800',
 #   'logo_only': True,
 #   'logo_link': 'https://your-main-project.readthedocs.io/',
-#}
+}
