@@ -28,7 +28,7 @@ Drag the program and SDK library files into the Raspberry Pi system image. For d
 
 Open the terminal and enter the command to change to the program directory: 
 
-```py
+```bash
 sudo chmod a+x Sensor_Demo/
 ```
 
@@ -40,13 +40,13 @@ In this case, the RGB sensor is used to detect the corresponding color, and the 
 
 1. Open the terminal and enter the command to navigate to the program directory, enter: **cd Desktop/Sensor_Demo/**, then press Enter.
 
-```py
+```bash
 cd Desktop/Sensor_Demo/
 ```
 
 2. To run this example program, enter: 
 
-```py
+```bash
 python3 ColorSensorDemo.py
 ```
 

@@ -130,13 +130,13 @@ Program to display the color sensor detection results in the Jetson terminal win
 
 1)  Open the terminal and enter the following command to navigate to the program directory, and press Enter
 
-```py
+```bash
 cd Desktop/
 ```
 
 2. Run the program by entering:
 
-```py
+```bash
 sudo python3 ColorSensorDemo.py
 ```
 

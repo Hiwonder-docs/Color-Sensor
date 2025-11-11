@@ -50,7 +50,7 @@ Aim the color sensor at objects in red, green, and blue respectively. The sensor
 
 - **Import Libraries**
 
-```py
+```c++
 #include <SoftWire.h>
 #include <Adafruit_APDS9960.h>
 
@@ -79,10 +79,10 @@ Program to define the sensor interfaces by connecting to the SDA and SCL pins, a
 
 - **Serial Port Initialization**
 
-```py
+```c++
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(9600);
 
   if(!apds.begin()){
     Serial.println("failed to initialize device! Please check your wiring.");
@@ -98,10 +98,10 @@ After initializing the serial port, the program detects the color sensor and pri
 
 - **Color Detection Method**
 
-```py
+```c++
 void colorDetect()
 {
-  uint16_t r, g, b, c;
+  uint16_t r, g, b, c;
   int t;
   //Color Detection Initialization Delay
   while(!apds.colorDataReady()){
@@ -148,10 +148,10 @@ Program to separate the collected RGB color readings, determine which reading ha
 
 - **Loop Process**
 
-```py
+```c++
 void setup()
 {
-  colorDetect();//Perform Color Detection
+  colorDetect();//Perform Color Detection
   delay(200);
 }
 ```
