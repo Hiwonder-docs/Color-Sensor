@@ -149,22 +149,48 @@ while True:
     time.sleep(0.2)
 ```
 
-1)  Use the method of **APDS9960** library to read the red, green, and blue channel values.
+1. Use the method of **APDS9960** library to read the red, green, and blue channel values.
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image14.png" style="width:500px" />
+   ```py
+       # Read the three color channel values (读取三个颜色通道值)
+       red = apds.readRedLight()
+       green = apds.readGreenLight()
+       blue = apds.readBlueLight()
+   ```
 
-2)  Calibrate and adjust the range of the red, green, and blue color channel values.
+2. Calibrate and adjust the range of the red, green, and blue color channel values.
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image15.png" style="width:500px" />
+   ```py
+       # Add calibration (加入校准)
+       r = abs(int((red - R_B)*255/(R_W - R_B)))
+       g = abs(int((green - G_B)*255/(G_W - G_B)))
+       b = abs(int((blue - B_B)*255/(B_W - B_B)))
+   ```
 
-3)  Determine the dominant color in the current environment based on the values of the three color channels.
+3. Determine the dominant color in the current environment based on the values of the three color channels.
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image16.png" style="width:500px" />
+   ```py
+       # Determine color (判别颜色)
+       if r - max(g, b) > 40:
+           detect_color = 'red'
+       elif g - max(r, b) > 40:
+           detect_color = 'green'
+       elif b - max(r, g) > 40:
+           detect_color = 'blue'
+   ```
 
-4)  Print the detected color or None. So you can identify the dominant color in the current environment.
+4. Print the detected color or None. So you can identify the dominant color in the current environment.
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image17.png" style="width:500px" />
+   ```py
+       else:
+           detect_color = None
+       print(detect_color)
+   ```
 
-5)  Pause the code for 0.2 seconds before repeating, in order to control the detection frequency.
+5. Pause the code for 0.2 seconds before repeating, in order to control the detection frequency.
 
-<img class="common_img" src="../_static/media/chapter_1/section_3/media/image18.png" style="width:500px" />
+   ```py
+       time.sleep(0.2)
+   ```
+
+   
